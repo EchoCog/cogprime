@@ -1,0 +1,205 @@
+# VM-Daemon-Sys Configuration
+# Configuration for cognitive service orchestration
+
+daemon:
+  # Main daemon settings
+  port: 8080
+  host: "0.0.0.0"
+  workers: 4
+  log_level: "INFO"
+  
+  # Security settings
+  enable_auth: false
+  api_key: ""
+  
+  # Performance settings
+  max_concurrent_requests: 100
+  request_timeout: 30  # seconds
+  
+services:
+  # Relevance realization service
+  relevance:
+    instances: 2
+    port_start: 8100
+    memory_limit: 512  # MB
+    cpu_limit: 0.5     # CPU cores
+    auto_restart: true
+    health_check_interval: 30
+    startup_timeout: 60
+    dependencies: []
+    
+  # Wisdom ecology service
+  wisdom:
+    instances: 1
+    port_start: 8200
+    memory_limit: 1024
+    cpu_limit: 1.0
+    auto_restart: true
+    health_check_interval: 30
+    startup_timeout: 60
+    dependencies: []
+    
+  # Rationality core service
+  rationality:
+    instances: 1
+    port_start: 8300
+    memory_limit: 512
+    cpu_limit: 0.5
+    auto_restart: true
+    health_check_interval: 30
+    startup_timeout: 60
+    dependencies: []
+    
+  # Phenomenology service
+  phenomenology:
+    instances: 1
+    port_start: 8400
+    memory_limit: 512
+    cpu_limit: 0.5
+    auto_restart: true
+    health_check_interval: 30
+    startup_timeout: 60
+    dependencies: []
+    
+  # Meaning making service
+  meaning_making:
+    instances: 1
+    port_start: 8500
+    memory_limit: 512
+    cpu_limit: 0.5
+    auto_restart: true
+    health_check_interval: 30
+    startup_timeout: 60
+    dependencies: []
+    
+  # Integration core service
+  integration:
+    instances: 1
+    port_start: 8600
+    memory_limit: 1024
+    cpu_limit: 1.0
+    auto_restart: true
+    health_check_interval: 30
+    startup_timeout: 60
+    dependencies: []
+    
+  # Silicon Sage orchestrator service
+  silicon_sage:
+    instances: 1
+    port_start: 8700
+    memory_limit: 2048
+    cpu_limit: 2.0
+    auto_restart: true
+    health_check_interval: 30
+    startup_timeout: 60
+    dependencies:
+      - "relevance"
+      - "wisdom"
+      - "rationality"
+      - "phenomenology"
+      - "meaning_making"
+      - "integration"
+
+load_balancer:
+  # Load balancing strategy
+  strategy: "cognitive_aware"  # round_robin, weighted_round_robin, least_connections, least_response_time, cognitive_aware
+  
+  # Health checking
+  health_check_interval: 30
+  failure_threshold: 3
+  recovery_threshold: 2
+  
+  # Weights (used for weighted_round_robin)
+  default_weight: 1.0
+  
+  # Cognitive-aware settings
+  complexity_factor: 0.3
+  load_factor: 0.4
+  performance_factor: 0.3
+
+monitoring:
+  # Health monitoring
+  enabled: true
+  check_interval: 60  # seconds
+  metrics_retention: 3600  # seconds (1 hour)
+  
+  # Alerting
+  alerts_enabled: true
+  alert_thresholds:
+    cpu_warning: 70.0      # percent
+    cpu_critical: 90.0
+    memory_warning: 80.0
+    memory_critical: 95.0
+    response_time_warning: 1000.0   # milliseconds
+    response_time_critical: 5000.0
+    error_rate_warning: 0.05        # 5%
+    error_rate_critical: 0.1        # 10%
+    cognitive_load_warning: 0.8
+    cognitive_load_critical: 0.95
+  
+  # Metrics collection
+  collect_system_metrics: true
+  collect_service_metrics: true
+  collect_cognitive_metrics: true
+
+logging:
+  # Logging configuration
+  level: "INFO"
+  format: "structured"  # simple, structured
+  
+  # File logging
+  file_enabled: true
+  file_path: "logs/cognitive_daemon.log"
+  file_max_size: "10MB"
+  file_backup_count: 5
+  
+  # Console logging
+  console_enabled: true
+  console_level: "INFO"
+
+database:
+  # Optional database for persistent storage
+  enabled: false
+  type: "sqlite"  # sqlite, postgresql, mysql
+  connection_string: "sqlite:///cognitive_daemon.db"
+  
+  # Connection pool settings
+  pool_size: 5
+  max_overflow: 10
+  pool_timeout: 30
+
+storage:
+  # Storage for temporary files and cache
+  temp_dir: "/tmp/cognitive_daemon"
+  cache_dir: "cache"
+  
+  # Cache settings
+  enable_cache: true
+  cache_ttl: 300  # seconds (5 minutes)
+  max_cache_size: "100MB"
+
+# Environment-specific overrides
+environments:
+  development:
+    daemon:
+      log_level: "DEBUG"
+    monitoring:
+      check_interval: 30
+    logging:
+      console_level: "DEBUG"
+      
+  production:
+    daemon:
+      log_level: "INFO"
+      enable_auth: true
+    services:
+      relevance:
+        instances: 3
+      wisdom:
+        instances: 2
+      silicon_sage:
+        instances: 2
+    monitoring:
+      check_interval: 60
+    logging:
+      console_level: "WARNING"
