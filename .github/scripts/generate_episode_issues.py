@@ -65,7 +65,7 @@ class EpisodeProcessor:
             'sections': sections,
             'concepts': concepts,
             'summary': summary,
-            'file_path': str(file_path.relative_to(Path.cwd()))
+            'file_path': str(file_path)
         }
     
     def extract_key_concepts(self, content: str) -> List[str]:
