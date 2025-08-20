@@ -1,0 +1,47 @@
+name: Generate Episode Issues
+
+on:
+  workflow_dispatch:
+    inputs:
+      episode_range:
+        description: 'Episode range to process (e.g., "1-10" or "all")'
+        required: false
+        default: 'all'
+  schedule:
+    # Run weekly on Sundays at 8:00 AM UTC
+    - cron: '0 8 * * 0'
+
+jobs:
+  generate-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install PyYAML requests
+        
+    - name: Generate episode issues
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO_OWNER: ${{ github.repository_owner }}
+        REPO_NAME: ${{ github.event.repository.name }}
+        EPISODE_RANGE: ${{ github.event.inputs.episode_range || 'all' }}
+      run: |
+        python .github/scripts/generate_episode_issues.py
+        
+    - name: Create summary
+      run: |
+        echo "Episode issues generation completed" >> $GITHUB_STEP_SUMMARY
+        echo "Range processed: ${{ github.event.inputs.episode_range || 'all' }}" >> $GITHUB_STEP_SUMMARY
