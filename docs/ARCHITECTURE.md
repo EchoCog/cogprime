@@ -369,6 +369,20 @@ logging:
 - Performance and error tracking
 - User interaction analytics
 
+## Episode Analysis Integration
+
+### Theoretical Foundation
+
+CogPrime's architecture is deeply informed by John Vervaeke's research on relevance realization, wisdom, and the meaning crisis. Detailed analyses connecting specific episodes to implementation are available in the [episodes directory](episodes/README.md).
+
+**Key Episode Insights Integrated:**
+- **Meaning Crisis Framework**: Informs RelevanceCore and AletheiaCore design for detecting and addressing breakdown in meaning-making
+- **Wisdom Ecology Principles**: Guides horizontal integration across multiple psychotechnologies
+- **Transformative Learning**: Shapes recursive dynamics in cognitive processing
+- **Collaborative Investigation**: Influences distributed processing architecture
+
+See [Episode 00 Discussion](episodes/Episode_00_Discussion.md) for foundational analysis connecting the meaning crisis to CogPrime's architecture.
+
 ## Future Enhancements
 
 ### Planned Features
@@ -376,9 +390,13 @@ logging:
 2. **Multi-Agent Systems**: Collaborative cognitive architectures
 3. **Real-time Adaptation**: Dynamic parameter optimization
 4. **Extended Phenomenology**: Richer experiential processing
+5. **Meaning Crisis Detection**: Real-time relevance realization monitoring
+6. **Wisdom Integration Pipeline**: Automated extraction from traditional sources
 
 ### Research Directions
 1. **Cognitive Synergy**: Enhanced module interaction patterns
 2. **Meaning Emergence**: Automatic meaning discovery mechanisms
 3. **Wisdom Cultivation**: Learning-based wisdom enhancement
 4. **Crisis Response**: Specialized meaning crisis intervention
+5. **Bullshit Detection**: Advanced filtering of low-quality information
+6. **Collaborative Reflection**: Framework for group cognitive processing

@@ -2,7 +2,7 @@ from enum import Enum
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 from .aletheia import AletheiaCore
-from .phenomenology import PhenomenologicalMode, ExistentialDimension, PhenomenologicalState
+from .phenomenology import ExperienceMode, PhenomenologicalState
 
 class PhenomenologyCore:
     """Enhanced phenomenological investigation and existential dimensions.
