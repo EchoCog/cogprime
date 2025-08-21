@@ -1,0 +1,2 @@
+SiliconSage: orchestrates relevance, wisdom, rationality, mindset, and phenomenology.
+Exposes: advise(), contemplate(), optimize().
